@@ -27,9 +27,9 @@
   
       <!-- Name Input Overlay -->
       <div class="overlay" id="name-overlay" style="display: flex;">
-          <form class="input-box" onsubmit="StartGame()">
+          <form class="input-box" oninput="EnableStartButton()" onsubmit="StartGame()">
           <label>Player Name: <input id="name-input-p1" maxlength="6"/></label><br />
-          <button onclick="StartGame()">Start</button>
+          <button onclick="StartGame()" id="start-button">Start</button>
           </form>
       </div>
   

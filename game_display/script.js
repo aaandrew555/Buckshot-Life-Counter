@@ -48,8 +48,14 @@ function StartGame() {
   // Cancel form submission
   if (event) event.preventDefault();
 
-  // Load player names
-  player1.name = document.getElementById('name-input-p1').value.toUpperCase() || 'PLAYER1';
+  // Load player name
+  user_input = name_input.value.toUpperCase();
+  if (user_input) {
+    player1.name = user_input;
+  } else {
+    player1.name = 'PLAYER1';
+  }
+  localStorage['player1_name'] = user_input;
   document.getElementById('name-input-p1').value = "";
 
   // Hide the Name Input
@@ -73,15 +79,6 @@ function ShowScoreboard() {
   PlaySound(soundEffects["health_counter_bootup"]);
   setTimeout(() => {UpdateUI();}, 1000);
   game_state = 'playing';
-}
-
-function ShowGameOver() {
-  console.log("Game Over!");
-  name_input_overlay.style.display = 'none';
-  scoreboard.style.display = 'none';
-  game_state = 'pause';
-  // document.getElementById('winner-text').textContent = "GAME OVER!";
-  setTimeout(() => {winner_overlay.style.display = 'flex';}, 1000);
 }
 
 function UpdateUI() {
@@ -136,6 +133,15 @@ function UpdateUI() {
   player1.prev_lives = player1.lives;
 }
 
+function ShowGameOver() {
+  console.log("Game Over!");
+  name_input_overlay.style.display = 'none';
+  scoreboard.style.display = 'none';
+  game_state = 'pause';
+  // document.getElementById('winner-text').textContent = "GAME OVER!";
+  setTimeout(() => {winner_overlay.style.display = 'flex';}, 1000);
+}
+
 function WhiteOverlay() {
   white_overlay.style.display = 'flex';
   requestAnimationFrame(() =>
@@ -155,7 +161,7 @@ function BloodOverlay() {
   layers.forEach((layer, i) => {
     layer.style.animation = "none"; // reset if retriggered
     layer.offsetHeight; // force reflow
-    layer.style.animation = `white-fade 2s ease-out ${i * 50 + 200}ms forwards`;
+    layer.style.animation = `white-fade 5s ease-out ${i * 100 + 200}ms forwards`;
   });
 }
 
@@ -166,10 +172,11 @@ function Shoot(player, damage = 1) {
     //PlaySound(soundEffects["shoot"]);
     UpdateUI();
     PlaySound(soundEffects["health_counter_decrease"]);
-    //BloodOverlay()
     // Death
     if (player.lives <= 0) {
       player.lives = 0;
+      // Blood Overlay
+      setTimeout(() => {BloodOverlay();}, 200);
       setTimeout(() => {ShowGameOver();}, 1000);
     }
   }
@@ -192,4 +199,17 @@ function DecreaseLives() {
 function IncreaseLives() {
   console.log("INCREASE");
   Heal(player1);
+}
+
+
+
+// UI
+const start_button = document.getElementById('start-button');
+const name_input = document.getElementById('name-input-p1');
+
+// Initialise name input from cache
+name_input.value = localStorage['player1_name'] || ""
+
+function EnableStartButton() {
+  start_button.style.opacity = 1;
 }

@@ -12,8 +12,8 @@
 html, body {
   margin: 0;
   padding: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background: black;
   color: #c5ffb7;
   font-family: 'HydrogenType';
@@ -25,6 +25,7 @@ html, body {
   user-select: none;
   user-drag: none;
   color: inherit;
+  font-family: inherit;
 }
 
 /* ---------- GAME WRAPPER ---------- */
@@ -45,25 +46,22 @@ html, body {
 
 /* ---------- ORIENTATION HANDLING ---------- */
 
-@media screen and (orientation: portrait) {
-  #game-wrapper {
-    display: none;
-  }
-
-  body::before {
-    content: "Rotate your device";
-    position: fixed;
-    inset: 0;
+/*@media screen and (orientation: portrait) {
+  body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: black;
-    color: #c5ffb7;
-    font-size: 6vw;
-    text-align: center;
-    z-index: 9999;
   }
-}
+
+  #game-wrapper {
+    position: relative;
+    width: 100vh;
+    height: 100vw;
+    transform: rotate(90deg);
+    transform-origin: center center;
+  }
+}*/
+
 
 /* ---------- CRT EFFECT ---------- */
 
@@ -72,7 +70,6 @@ html, body {
   inset: 0;
   filter: blur(0.8px);
   transform: perspective(1200px) scale(0.98);
-  font-family: 'HydrogenType';
 }
 
 .crt::after {
@@ -83,8 +80,8 @@ html, body {
   background-image:
     repeating-linear-gradient(
       to bottom,
-      rgba(255,255,255,0.03),
-      rgba(255,255,255,0.03) 1px,
+      rgba(255,255,255,0.08),
+      rgba(255,255,255,0.08) 1px,
       transparent 1px,
       transparent 3px
     ),
@@ -95,7 +92,7 @@ html, body {
       transparent 1px,
       transparent 3px
     );
-  animation: flicker 0.15s infinite;
+  animation: flicker 0.2s infinite;
   z-index: 9999;
 }
 
@@ -110,9 +107,9 @@ html, body {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  mix-blend-mode: multiply;
+  mix-blend-mode: blend;
   filter: brightness(5) opacity(0.5);
-  z-index: 8;
+  z-index: 10000000;
 }
 
 .blood-layer {
@@ -127,7 +124,7 @@ html, body {
 
 @keyframes white-fade {
   0%, 100% { opacity: 0; }
-  10%, 40% { opacity: 1; }
+  10%, 40% { opacity: 0.6; }
 }
 
 .white-fade {
@@ -151,52 +148,47 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0,0,0,0.8);
+  /*background: rgba(0,0,0,0.8);*/
   z-index: 10;
   text-align: center;
   flex-direction: column;
 }
 
 .input-box {
-  font-size: 8vh;
-  font-family: 'HydrogenType';
+  font-size: 18vh;
 }
 
 .input-box label {
   display: block;
-  margin-bottom: 8vh;
+  margin-bottom: -8vh;
 }
 
 .input-box input {
 	padding-left: 1vw;
-  font-size: 7vh;
-  width: 25vw;
+  font-size: 22vh;
+  width: 32vw;
   text-align: left;
-  background: black;
+  background: transparent;
   border: 0.4vh solid #c5ffb7;
   color: #c5ffb7;
-  font-family: 'HydrogenType';
   text-transform: uppercase;
 }
 
 .input-box button {
-	font-family: 'HydrogenType';
-  font-size: 5vh;
+  font-size: 20vh;
   margin-top: 1vh;
   background: transparent;
   border: 0.4vh solid #c5ffb7;
   color: #c5ffb7;
   padding: 1.5vh 3vw;
   cursor: pointer;
-}
-
-#winner-overlay {
-  background: rgba(0,0,0,0.85);
+  opacity: 0.5;
 }
 
 .winner-text {
-  font-size: 20vh;
+  font-size: 35vh;
   text-align: center;
+  font-family: 'Dot Matrix';
 }
 
 /* ---------- SCOREBOARD ---------- */
@@ -219,7 +211,7 @@ html, body {
 }
 
 .name {
-  font-size: 18vh; /* scales name size */
+  font-size: 22vh; /* scales name size */
   text-align: center;
 }
 
@@ -246,7 +238,7 @@ html, body {
 .bottom-section button {
   background: transparent;
   border: none;
-  font-size: 20vh; /* scales for mobile */
+  font-size: 50vh; /* scales for mobile */
   color: #c5ffb7;
   cursor: pointer;
   width: 100%;
@@ -257,14 +249,15 @@ html, body {
 .score {
   flex: 0 0 65vw;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
   overflow: hidden;
   gap: 3vw;
+  padding-left: 2vw;
 }
 
 .bottom-section img {
-  height: 35vh; /* make charge icons larger */
+  height: 50vh; /* make charge icons larger */
   object-fit: contain;
 }
 
