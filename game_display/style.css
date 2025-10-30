@@ -44,24 +44,6 @@ html, body {
 
 }
 
-/* ---------- ORIENTATION HANDLING ---------- */
-
-/*@media screen and (orientation: portrait) {
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #game-wrapper {
-    position: relative;
-    width: 100vh;
-    height: 100vw;
-    transform: rotate(90deg);
-    transform-origin: center center;
-  }
-}*/
-
 
 /* ---------- CRT EFFECT ---------- */
 
@@ -274,4 +256,54 @@ html, body {
 
 .charge-blink-slow {
   animation: charge-blink 1s steps(1, start) infinite;
+}
+
+
+
+/* ---------- ORIENTATION HANDLING ---------- */
+
+@media screen and (orientation: portrait) {
+  /* Adapt name input */
+  .input-box {
+    font-size: 8vh;
+  }
+  
+  .input-box label {
+    margin-botttom: 0vh;
+  }
+  
+  .input-box input {
+    margin-top: 2vh;
+    padding-left: 4vw;
+    font-size: 10vh;
+    width: 80vw;
+  }
+  
+  .input-box button {
+    margin-top: 20vh;
+    font-size: 10vh;
+  }
+
+
+  /* Replace scoreboard with rotate message */
+  #scoreboard {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: black;
+    font-size: 5vh;
+    text-align: center;
+    color: #c5ffb7;
+    position: absolute;
+    inset: 0;
+  }
+
+  #scoreboard::before {
+    content: "ROTATE YOUR DEVICE";
+  }
+
+  /* Hide all children of scoreboard so only message shows */
+  #scoreboard > * {
+    display: none !important;
+  }
 }
