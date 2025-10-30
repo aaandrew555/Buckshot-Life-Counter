@@ -6,19 +6,20 @@ audio_folder = root_folder + "audio/"
 images_folder = root_folder + "images/"
 
 const soundEffects = {
-  "bootup": audio_folder + "my_bootup.wav",
   "health_counter_bootup": audio_folder + "health counter bootup.ogg",
   "health_counter_beep": audio_folder + "health counter beep2.wav",
   "health_counter_heal": audio_folder + "health counter confirmation.ogg",
-  "health_counter_decrease": audio_folder + "health counter reduce health.ogg",
-  "heartbeat": audio_folder + "heartbeat effect.ogg",
-  "heartbeat2": audio_folder + "heartbeat effect2.ogg",
-  "round_blink": audio_folder + "round blinker wave.ogg",
-  "round_hum": audio_folder + "my_round indicator hum.wav",
-  "round_shut_down": audio_folder + "round indicator shut down.ogg",
-  "shoot": audio_folder + "temp gunshot_live.wav",
-  "winner": audio_folder + "winner.ogg",
-  "shut_down": audio_folder + "crt_turn off display2.ogg"
+  "health_counter_decrease": audio_folder + "health counter reduce health.ogg"
+}
+
+
+
+// NoSleep Logic
+//document.addEventListener('touchstart', EnableNoSleep, false);
+let noSleep = new NoSleep();
+function EnableNoSleep() {
+  noSleep.enable();
+  console.log("No Sleep turned on!");
 }
 
 
@@ -56,6 +57,9 @@ function StartGame() {
 
   // Fill in names
   document.getElementById('name-p1').textContent = player1.name;
+
+  // Enable NoSleep
+  EnableNoSleep();
 
   // Scoreboard
   ShowScoreboard(1);
