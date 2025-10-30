@@ -20,6 +20,16 @@ html, body {
   overflow: hidden;
 }
 
+body {
+  opacity: 0;
+  animation: fade_in 2s forwards;
+}
+@keyframes fade_in {
+  to {
+    opacity: 1;
+  }
+}
+
 * {
   box-sizing: border-box;
   user-select: none;
@@ -41,7 +51,6 @@ html, body {
   flex-direction: column;
   align-items: stretch;
 	justify-content: stretch;
-
 }
 
 
@@ -106,7 +115,7 @@ html, body {
 
 @keyframes white-fade {
   0%, 100% { opacity: 0; }
-  10%, 40% { opacity: 0.6; }
+  10%, 40% { opacity: 0.5; }
 }
 
 .white-fade {

@@ -58,7 +58,7 @@ function StartGame() {
   EnableNoSleep();
 
   // Scoreboard
-  ShowScoreboard(1);
+  setTimeout(() => {ShowScoreboard();}, 1000);
 }
 
 function ShowScoreboard() {
@@ -72,6 +72,9 @@ function ShowScoreboard() {
 }
 
 function UpdateUI() {
+  // First Refresh UI
+  RefreshUI()
+
   const delta_p1 = player1.lives - player1.prev_lives;
 
   // === PLAYER 1 ===
@@ -121,6 +124,18 @@ function UpdateUI() {
 
   // Update Prev Lives
   player1.prev_lives = player1.lives;
+}
+
+function RefreshUI() {
+  // Remove all pending animations and make DOM match current lives
+  [ [player1, container_p1] ].forEach(([player, container]) => {
+    const imgs = container.querySelectorAll('img');
+
+    // Remove all listeners + animations instantly
+    imgs.forEach(img => {
+      img.replaceWith(img.cloneNode(true)); // removes event listeners + resets animation
+    });
+  });
 }
 
 function ShowGameOver() {
@@ -203,6 +218,10 @@ name_input.value = localStorage['player1_name'] || ""
 function EnableStartButton() {
   start_button.style.opacity = 1;
 }
+
+// Hide Containers
+scoreboard.style.display = 'none';
+winner_overlay.style.display = 'none';
 
 // NoSleep Logic
 //document.addEventListener('touchstart', EnableNoSleep, false);
