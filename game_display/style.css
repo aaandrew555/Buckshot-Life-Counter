@@ -257,7 +257,7 @@ html, body {
 }
 
 .bottom-section img {
-  height: 50vh; /* make charge icons larger */
+  width: 13vw; /* make charge icons larger */
   object-fit: contain;
 }
 

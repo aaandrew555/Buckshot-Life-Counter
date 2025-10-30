@@ -14,16 +14,6 @@ const soundEffects = {
 
 
 
-// NoSleep Logic
-//document.addEventListener('touchstart', EnableNoSleep, false);
-let noSleep = new NoSleep();
-function EnableNoSleep() {
-  noSleep.enable();
-  console.log("No Sleep turned on!");
-}
-
-
-
 // Game Logic
 let game_state = 'off'; // 'start' | 'pause' | 'playing' | 'off'
 let max_lives = 4;
@@ -212,4 +202,17 @@ name_input.value = localStorage['player1_name'] || ""
 
 function EnableStartButton() {
   start_button.style.opacity = 1;
+}
+
+// NoSleep Logic
+//document.addEventListener('touchstart', EnableNoSleep, false);
+let noSleep = new NoSleep();
+function EnableNoSleep() {
+  noSleep.enable();
+  console.log("No Sleep turned on!");
+}
+
+// Landscape Lock
+if (screen.orientation && screen.orientation.lock) {
+  screen.orientation.lock('landscape').catch(err => console.warn(err));
 }
